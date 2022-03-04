@@ -404,13 +404,7 @@ extension AVVideoIOUnit {
             let image: CIImage = effect(buffer, info: sampleBuffer)
             extent = image.extent
             if !effects.isEmpty {
-                #if os(macOS)
                 CVPixelBufferPoolCreatePixelBuffer(nil, pixelBufferPool, &imageBuffer)
-                #else
-                if buffer.width != Int(extent.width) || buffer.height != Int(extent.height) {
-                    CVPixelBufferPoolCreatePixelBuffer(nil, pixelBufferPool, &imageBuffer)
-                }
-                #endif
                 if let imageBuffer = imageBuffer {
                     CVPixelBufferLockBaseAddress(imageBuffer, [])
                 }
